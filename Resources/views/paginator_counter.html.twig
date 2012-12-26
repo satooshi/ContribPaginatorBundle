@@ -1,0 +1,5 @@
+{% if paginator.canPaginate() %}
+<div class="pagination">
+    ({{ page.firstIndex }} - {{ page.lastIndex }} / {{ paginator.totalCount }})
+</div>
+{% endif %}

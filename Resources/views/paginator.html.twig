@@ -1,0 +1,37 @@
+{% if paginator.canPaginate() %}
+<div class="pagination pagination-centered">
+    <ul>
+
+    {% if page.hasPrevPage() %}
+        {% if paginator.showStartLink() %}
+        <li><a href="{{ paginator.getStartPageLink() }}">&laquo;</a></li>
+        {% endif %}
+        <li><a href="{{ page.getPrevPageLink() }}">&lsaquo;</a></li>
+    {% endif %}
+
+    {% if paginator.showStartEllipsis() %}
+        <li><span>...</span></li>
+    {% endif %}
+
+    {% for pageNumber in paginator.getDisplayPageRange() %}
+        {% if page.isCurrent(pageNumber) %}
+        <li class="active"><span>{{ pageNumber }}</span></li>
+        {% else %}
+        <li><a href="{{ paginator.link(pageNumber) }}">{{ pageNumber }}</a></li>
+        {% endif %}
+    {% endfor %}
+
+    {% if paginator.showEndEllipsis() %}
+        <li><span>...</span></li>
+    {% endif %}
+
+    {% if page.hasNextPage() %}
+        <li><a href="{{ page.getNextPageLink() }}">&rsaquo;</a></li>
+        {% if paginator.showEndLink() %}
+        <li><a href="{{ paginator.getEndPageLink() }}">&raquo;</a></li>
+        {% endif %}
+    {% endif %}
+
+    </ul>
+</div>
+{% endif %}
