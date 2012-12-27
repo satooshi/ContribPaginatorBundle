@@ -64,6 +64,8 @@ class Paginator
      */
     protected $dataSource;
 
+    protected $countDataSource;
+
     /**
      * @var \Symfony\Component\HttpFoundation\Request
      */
@@ -172,13 +174,22 @@ class Paginator
      * @param bool $fetchJoinCollection Whether the query joins a collection (true by default).
      * @return \Contrib\CommonBundle\ViewModel\Page
      */
-    public function page($number, $fetchJoinCollection = true)
+    public function page($number, $totalCount = null, $fetchJoinCollection = true)
     {
         $this->assertPageNumber($number);
 
         $this->currentPage = (int)$number;
 
         $dataSource = $this->dataSource($this->currentPage, $fetchJoinCollection);
+
+        if ($totalCount === null) {
+            // total count of data source
+            // execute  SELECT COUNT() query
+            $this->totalCount = count($dataSource);
+        } else {
+            $this->totalCount = $totalCount;
+        }
+
         $entities = $this->object($dataSource);
 
         $countPerPage = count($entities);
@@ -305,20 +316,10 @@ class Paginator
 
             $query->setFirstResult($offset)->setMaxResults($this->limit);
 
-            $dataSource = new DoctrinePaginator($query, $fetchJoinCollection);
-        } else {
-            $dataSource = $query;
+            return new DoctrinePaginator($query, $fetchJoinCollection);
         }
 
-        // total count of data source
-        // execute  SELECT COUNT() query
-        $this->totalCount = count($dataSource);
-
-        if ($this->totalCount === 0) {
-            return array();
-        }
-
-        return $dataSource;
+        return $query;
     }
 
     /**
