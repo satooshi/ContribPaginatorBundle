@@ -171,6 +171,7 @@ class Paginator
      * Return Page object.
      *
      * @param int  $number              Page number.
+     * @param int  $totalCount          Total count of select data source.
      * @param bool $fetchJoinCollection Whether the query joins a collection (true by default).
      * @return \Contrib\CommonBundle\ViewModel\Page
      */
@@ -313,6 +314,13 @@ class Paginator
 
         if ($query instanceof Query) {
             $offset = $this->calculateOffset($number);
+
+            if (is_callable($fetchJoinCollection)) {
+                $idList = $fetchJoinCollection($offset, $this->limit);
+                $query->setParameter('idList', $idList);
+
+                return new DoctrinePaginator($query, false);
+            }
 
             $query->setFirstResult($offset)->setMaxResults($this->limit);
 
