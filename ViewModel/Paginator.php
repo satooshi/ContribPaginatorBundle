@@ -317,6 +317,11 @@ class Paginator
 
             if (is_callable($fetchJoinCollection)) {
                 $idList = $fetchJoinCollection($offset, $this->limit);
+
+                if (empty($idList)) {
+                    return array();
+                }
+
                 $query->setParameter('idList', $idList);
 
                 return new DoctrinePaginator($query, false);
