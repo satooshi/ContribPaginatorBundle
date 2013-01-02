@@ -135,6 +135,15 @@ class Paginator
      */
     protected $endPage;
 
+    // optional
+
+    /**
+     * Entity ID list if $fetchJoinCollection is set when page() called.
+     *
+     * @var array
+     */
+    protected $idList = null;
+
     /**
      * Constructor.
      *
@@ -316,13 +325,13 @@ class Paginator
             $offset = $this->calculateOffset($number);
 
             if (is_callable($fetchJoinCollection)) {
-                $idList = $fetchJoinCollection($offset, $this->limit);
+                $this->idList = $fetchJoinCollection($offset, $this->limit);
 
-                if (empty($idList)) {
+                if (empty($this->idList)) {
                     return array();
                 }
 
-                $query->setParameter('idList', $idList);
+                $query->setParameter('idList', $this->idList);
 
                 return new DoctrinePaginator($query, false);
             }
@@ -530,5 +539,17 @@ class Paginator
     public function getEndPageLink()
     {
         return $this->link($this->endPage);
+    }
+
+    // optional
+
+    /**
+     * Return entity ID list.
+     *
+     * @return array
+     */
+    public function getIdList()
+    {
+        return $this->idList;
     }
 }
