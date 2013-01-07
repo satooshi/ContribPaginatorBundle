@@ -1,4 +1,5 @@
 {% if paginator.canPaginate() %}
+{% spaceless %}
 <div class="pagination pagination-centered">
     <ul>
 
@@ -34,4 +35,5 @@
 
     </ul>
 </div>
+{% endspaceless %}
 {% endif %}
