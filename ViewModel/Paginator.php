@@ -190,14 +190,19 @@ class Paginator
 
         $this->currentPage = (int)$number;
 
-        $dataSource = $this->dataSource($this->currentPage, $fetchJoinCollection);
-
         if ($totalCount === null) {
             // total count of data source
             // execute  SELECT COUNT() query
+            $dataSource = $this->dataSource($this->currentPage, $fetchJoinCollection);
             $this->totalCount = count($dataSource);
         } else {
             $this->totalCount = $totalCount;
+
+            if ($totalCount === 0) {
+                $dataSource = array();
+            } else {
+                $dataSource = $this->dataSource($this->currentPage, $fetchJoinCollection);
+            }
         }
 
         $entities = $this->object($dataSource);
