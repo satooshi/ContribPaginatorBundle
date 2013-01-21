@@ -1,6 +1,6 @@
 <?php
 
-namespace Contrib\PaginatorBundle\Form;
+namespace Contrib\Bundle\PaginatorBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,7 +20,7 @@ class PaginatorType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $defaultValues = array(
-            'data_class' => 'Contrib\PaginatorBundle\Form\Model\Paginator',
+            'data_class' => 'Contrib\Bundle\PaginatorBundle\Form\Model\Paginator',
         );
 
         $resolver->setDefaults($defaultValues);

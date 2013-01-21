@@ -1,6 +1,6 @@
 <?php
 
-namespace Contrib\PaginatorBundle\Form\Model;
+namespace Contrib\Bundle\PaginatorBundle\Form\Model;
 
 use Symfony\Component\Validator\Constraints as Assert;
 

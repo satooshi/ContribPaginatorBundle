@@ -1,6 +1,6 @@
 <?php
 
-namespace Contrib\PaginatorBundle;
+namespace Contrib\Bundle\PaginatorBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

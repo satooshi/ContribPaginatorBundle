@@ -1,6 +1,6 @@
 <?php
 
-namespace Contrib\PaginatorBundle\ViewModel;
+namespace Contrib\Bundle\PaginatorBundle\ViewModel;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -182,7 +182,7 @@ class Paginator
      * @param int  $number              Page number.
      * @param int  $totalCount          Total count of select data source.
      * @param bool $fetchJoinCollection Whether the query joins a collection (true by default).
-     * @return \Contrib\PaginatorBundle\ViewModel\Page
+     * @return \Contrib\Bundle\PaginatorBundle\ViewModel\Page
      */
     public function page($number, $totalCount = null, $fetchJoinCollection = true)
     {

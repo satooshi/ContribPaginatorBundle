@@ -1,6 +1,6 @@
 <?php
 
-namespace Contrib\PaginatorBundle\ViewModel;
+namespace Contrib\Bundle\PaginatorBundle\ViewModel;
 
 /**
  * Page represents paginated entity set..
