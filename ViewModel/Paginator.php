@@ -182,7 +182,7 @@ class Paginator
      * @param int  $number              Page number.
      * @param int  $totalCount          Total count of select data source.
      * @param bool $fetchJoinCollection Whether the query joins a collection (true by default).
-     * @return \Contrib\CommonBundle\ViewModel\Page
+     * @return \Contrib\PaginatorBundle\ViewModel\Page
      */
     public function page($number, $totalCount = null, $fetchJoinCollection = true)
     {
